@@ -11,7 +11,7 @@ namespace ui {
         [SerializeField]
         private Button bVisu;
         [SerializeField]
-        private Button bAide;
+        private Button bHelp;
 
         [SerializeField]
         private GameObject pParams, pVisu, pAide;
@@ -32,8 +32,8 @@ namespace ui {
                 pVisu.SetActive(true);
                 pAide.SetActive(false);
             }); 
-            bAide.onClick.AddListener(delegate {
-                Debug.Log("button aide click");
+            bHelp.onClick.AddListener(delegate {
+                Debug.Log("button help click");
                 pParams.SetActive(false);
                 pVisu.SetActive(false);
                 pAide.SetActive(true);

@@ -5,6 +5,8 @@ You have a visualization to display the coordinates {x,y} and you want the coord
 
 ## Maths
 
+When in normal trigo situation:
+
 ```
 angle1= 1 * 360/N
 angle2= 2 * 360/N
