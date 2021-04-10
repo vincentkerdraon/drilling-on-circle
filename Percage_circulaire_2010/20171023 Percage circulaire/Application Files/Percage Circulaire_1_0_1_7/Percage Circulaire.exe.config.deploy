@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <configSections>
+        <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+            <section name="Percage_Circulaire.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+        </sectionGroup>
+    </configSections>
+    <userSettings>
+        <Percage_Circulaire.Properties.Settings>
+            <setting name="Diameter" serializeAs="String">
+                <value>100</value>
+            </setting>
+            <setting name="Precision" serializeAs="String">
+                <value>3</value>
+            </setting>
+            <setting name="Offcet" serializeAs="String">
+                <value>0</value>
+            </setting>
+            <setting name="NbTools" serializeAs="String">
+                <value>3</value>
+            </setting>
+            <setting name="Width" serializeAs="String">
+                <value>800</value>
+            </setting>
+            <setting name="Height" serializeAs="String">
+                <value>500</value>
+            </setting>
+            <setting name="ShowAxis" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="ShowPointNum" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="ShowAngle" serializeAs="String">
+                <value>True</value>
+            </setting>
+        </Percage_Circulaire.Properties.Settings>
+    </userSettings>
+</configuration>
