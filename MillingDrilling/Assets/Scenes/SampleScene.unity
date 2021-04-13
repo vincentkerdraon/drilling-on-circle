@@ -159,8 +159,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -345}
-  m_SizeDelta: {x: 0, y: -710}
+  m_AnchoredPosition: {x: 0, y: -95}
+  m_SizeDelta: {x: 0, y: -210}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &38878273
 MonoBehaviour:
@@ -1786,6 +1786,7 @@ GameObject:
   - component: {fileID: 1368175465}
   - component: {fileID: 1368175467}
   - component: {fileID: 1368175466}
+  - component: {fileID: 1368175468}
   m_Layer: 5
   m_Name: Params
   m_TagString: Untagged
@@ -1852,6 +1853,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368175464}
   m_CullTransparentMesh: 0
+--- !u!114 &1368175468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368175464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16abdd031847fc94f82f91723e91ee43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ifNbHoles: {fileID: 685677002}
+  ifDiameter: {fileID: 166352755}
+  ifAngleShift: {fileID: 1097508973}
 --- !u!1 &1467503823
 GameObject:
   m_ObjectHideFlags: 0

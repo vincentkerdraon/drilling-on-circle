@@ -69,5 +69,11 @@ namespace Scripts
             }
 
         }
+
+        public override string ToString()
+        {
+            //FIXME DOUDOU 
+            return base.ToString();
+        }
     }
 }
