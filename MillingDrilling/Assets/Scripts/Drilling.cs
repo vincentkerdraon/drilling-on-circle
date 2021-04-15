@@ -16,7 +16,12 @@ namespace Scripts
 
         //Angle in degree: top position= {0;d/2} to circle center {0;0} to hole.
         //Not following trigonometric standard
-        public double Angle; 
+        public double Angle;
+
+        public override string ToString()
+        {
+            return "{ Coord="+Coord.ToString()+" , Angle="+Angle+"}";
+        }
     }
 
     [System.Serializable]
@@ -72,8 +77,13 @@ namespace Scripts
 
         public override string ToString()
         {
-            //FIXME DOUDOU 
-            return base.ToString();
+            string debug = "[";
+            for (int i = 0; i < AllDrillingsExact.Count; i++)
+            {
+                debug += AllDrillingsExact[i].ToString()+",\n";
+            }
+            debug += "] \n\n { Diameter="+Diameter+" , NbHoles="+NbHoles+" }";
+            return debug;
         }
     }
 }

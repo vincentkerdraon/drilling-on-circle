@@ -17,6 +17,8 @@ public class Params : MonoBehaviour
     private InputField ifAngleShift;
     private double angleShift;
 
+    Data Data;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,8 @@ public class Params : MonoBehaviour
         {
             UpdateField<double>(ifAngleShift, ref angleShift, (value) => { return value >= 0d && value < 360; }, (text) => { return double.Parse(text); });
         });
+
+        Data = GameObject.FindObjectOfType<Data>();
     }
 
     // Update is called once per frame
@@ -44,7 +48,7 @@ public class Params : MonoBehaviour
     {
         Debug.Log("updated params " + nbHoles + " " + diameter + " " + angleShift);
         Scripts.Drillings drillings = new Scripts.Drillings((uint)nbHoles, diameter, angleShift);
-
+        if (Data.DataChanged != null) Data.DataChanged(this, new Data.DataChangedArgs() { Drillings = drillings });
         Debug.Log(drillings.ToString());
     }
 
