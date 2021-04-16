@@ -20,7 +20,7 @@ namespace Scripts
 
         public override string ToString()
         {
-            return "{ Coord="+Coord.ToString()+" , Angle="+Angle+"}";
+            return "{Coord="+Coord.ToString()+", Angle="+Angle+"}";
         }
     }
 
@@ -30,9 +30,10 @@ namespace Scripts
         const int digits = 3;
 
         public uint NbHoles;
-
-        //in mm
+                //in mm
         public double Diameter;
+                //in degres
+        public double AngleShift;
 
         public List<Drilling> AllDrillingsExact;
         public List<Drilling> AllDrillingsRounded;
@@ -50,6 +51,7 @@ namespace Scripts
         {
             this.NbHoles = nbHoles;
             this.Diameter = diameter;
+            this.AngleShift = angleShift;
 
             AllDrillingsExact = new List<Drilling>((int)nbHoles);
             AllDrillingsRounded = new List<Drilling>((int)nbHoles);
@@ -72,17 +74,16 @@ namespace Scripts
 
                 angle -= (360 / (double)nbHoles) % 360;
             }
-
         }
 
         public override string ToString()
         {
-            string debug = "[";
+            string debug = "{Diameter=" + Diameter + ", NbHoles=" + NbHoles + ", AngleShift=" + AngleShift + ", Holes=[";
             for (int i = 0; i < AllDrillingsExact.Count; i++)
             {
-                debug += AllDrillingsExact[i].ToString()+",\n";
+                debug += AllDrillingsExact[i].ToString()+", ";
             }
-            debug += "] \n\n { Diameter="+Diameter+" , NbHoles="+NbHoles+" }";
+            debug += "]";
             return debug;
         }
     }
