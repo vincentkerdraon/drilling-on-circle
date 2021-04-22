@@ -17,6 +17,14 @@ public class Params : MonoBehaviour
     private InputField ifAngleShift;
     private double angleShift;
 
+    [SerializeField]
+    private InputField ifCoordX;
+    [SerializeField]
+    private InputField ifCoordY;
+    private System.Numerics.Vector2 FirstCoord = new System.Numerics.Vector2();
+
+    public bool IsFirstCoord = false;
+
     Data Data;
 
     // Start is called before the first frame update
@@ -28,11 +36,25 @@ public class Params : MonoBehaviour
         });
         ifDiameter.onEndEdit.AddListener(delegate
         {
+            IsFirstCoord = false;
             UpdateField<double>(ifDiameter, ref diameter, (value) => { return value > 0d && value < 10000d; }, (text) => { return double.Parse(text); });
         });
         ifAngleShift.onEndEdit.AddListener(delegate
         {
+            IsFirstCoord = false;
             UpdateField<double>(ifAngleShift, ref angleShift, (value) => { return value >= 0d && value < 360; }, (text) => { return double.Parse(text); });
+        });
+        ifCoordX.onEndEdit.AddListener(delegate
+        {
+            IsFirstCoord = true;
+            UpdateField<float>(ifCoordX, ref FirstCoord.X, (value) => { return value > -10000f && value < 10000f; }, (text) => { return float.Parse(text); });
+            Debug.Log("FirstCoord="+FirstCoord);
+        });
+        ifCoordY.onEndEdit.AddListener(delegate
+        {
+            IsFirstCoord = true;
+            UpdateField<float>(ifCoordY, ref FirstCoord.Y, (value) => { return value > -10000f && value < 10000f; }, (text) => { return float.Parse(text); });
+            Debug.Log("FirstCoord=" + FirstCoord);
         });
 
         Data = GameObject.FindObjectOfType<Data>();
@@ -46,8 +68,18 @@ public class Params : MonoBehaviour
 
     private void UpdateParams()
     {
+        Scripts.Drillings drillings;
+        if (IsFirstCoord)
+        {
+            Debug.Log("updated params " + nbHoles + " " + FirstCoord);
+            drillings = Scripts.Drillings.DrillingsFromExistingHole((uint)nbHoles, FirstCoord);
+        }
+        else
+        {
         Debug.Log("updated params " + nbHoles + " " + diameter + " " + angleShift);
-        Scripts.Drillings drillings = new Scripts.Drillings((uint)nbHoles, diameter, angleShift);
+        drillings = new Scripts.Drillings((uint)nbHoles, diameter, angleShift);
+        }
+
         if (Data.DataChanged != null) Data.DataChanged(this, new Data.DataChangedArgs() { Drillings = drillings });
         Debug.Log(drillings.ToString());
     }
