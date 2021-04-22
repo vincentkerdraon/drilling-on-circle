@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Visu : MonoBehaviour
+public class VisuCoord : MonoBehaviour
 {
     [SerializeField]
     private DrillingElement prefabDrillingElement;
