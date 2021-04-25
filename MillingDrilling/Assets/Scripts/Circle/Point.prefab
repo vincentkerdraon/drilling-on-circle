@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7485497037864426819}
   m_Layer: 0
   m_Name: Text (TMP)
-  m_TagString: Untagged
+  m_TagString: PointNumber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 1460779496226951805}
   - component: {fileID: 3466425084282195384}
   - component: {fileID: 3783387769822116918}
+  - component: {fileID: 7727087834870992809}
   m_Layer: 0
   m_Name: Point
   m_TagString: Untagged
@@ -282,3 +283,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 7485497037864426819}
+--- !u!58 &7727087834870992809
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8379522431976691110}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

@@ -17,6 +17,9 @@ public class VisuCoord : MonoBehaviour
         Data data = GameObject.FindObjectOfType<Data>();
         data.DataChanged += Data_DataChanged;
 
+        HoleSelected HoleSelected = GameObject.FindObjectOfType<HoleSelected>();
+        HoleSelected.HoleSelectedEvent += DrillingElement_Selected;
+
         Debug.Log("Looking in Visu.Start()");
         DisplayDrillings(data.drillings);
     }
@@ -33,6 +36,11 @@ public class VisuCoord : MonoBehaviour
         DisplayDrillings(args.Drillings);
     }
 
+    public void DrillingElement_Selected(object sender, HoleSelected.HoleSelectedArgs args)
+    {
+        Debug.Log("Selected "+args.index);
+    }
+
     public void DisplayDrillings(Drillings drillings)
     {
         Debug.Log("Drillings (Visu)" + drillings.ToString());
@@ -40,7 +48,10 @@ public class VisuCoord : MonoBehaviour
 
         for (int i = gridParent.childCount-1; i >= 0; i--)
         {
-            Destroy(gridParent.GetChild(i).gameObject);
+            GameObject de = gridParent.GetChild(i).gameObject;
+            Destroy(de);
+            if (de == null)
+                de = null;
         }
 
         for (int i = 0; i < drillings.AllDrillingsRounded.Count; i++)
@@ -48,7 +59,7 @@ public class VisuCoord : MonoBehaviour
             Drilling d = drillings.AllDrillingsRounded[i];
             DrillingElement drillingElement = Instantiate<DrillingElement>(prefabDrillingElement);
             drillingElement.UpdateFields(i+1, d.Coord);
-            drillingElement.transform.SetParent(gridParent);
+            drillingElement.transform.SetParent(gridParent,false);
         }
     }
 }

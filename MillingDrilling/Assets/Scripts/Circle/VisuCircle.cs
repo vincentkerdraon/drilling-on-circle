@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class VisuCircle : MonoBehaviour
 {
-    const float NORMA_RADIUS = 0.38f;// = 375/980
+    const float NORMA_RADIUS = 0.37f;// = 375/980
 
     [SerializeField]
     private PointCreator prefabPoint;
@@ -20,8 +20,8 @@ public class VisuCircle : MonoBehaviour
         data.DataChanged += Data_DataChanged;
 
 
-/*        Drillings drillings = new Drillings(4,10,0);
-        DisplayDrillings(drillings);*/
+        Drillings drillings = new Drillings(4,10,0);
+        DisplayDrillings(drillings);
     }
 
     public void Data_DataChanged(object sender, Data.DataChangedArgs args)
