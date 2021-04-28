@@ -160,8 +160,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -294}
-  m_SizeDelta: {x: 0, y: -610}
+  m_AnchoredPosition: {x: 0, y: -369.5}
+  m_SizeDelta: {x: 0, y: -761}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &38878273
 MonoBehaviour:
@@ -2388,7 +2388,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880605804}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
@@ -3190,7 +3190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1368175465
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3867,8 +3867,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -190}
-  m_SizeDelta: {x: -20, y: 100}
+  m_AnchoredPosition: {x: 0, y: -239}
+  m_SizeDelta: {x: -20, y: 175}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1589944601
 MonoBehaviour:
@@ -3903,10 +3903,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Je vais percer 6 trous distribues sur un cercle de diametre 280mm.
-
-    Quelle
-    sont les coordonnees {x;y}?'
+  m_Text: "Je veux percer 6 trous distribu\xE9s sur un cercle de diam\xE8tre 82.8
+    mm.\nQuelle sont les coordonn\xE9es {x;y} des trous ?"
 --- !u!222 &1589944602
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4264,8 +4262,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -442}
-  m_SizeDelta: {x: -20, y: 380}
+  m_AnchoredPosition: {x: 0, y: -545}
+  m_SizeDelta: {x: -20, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1710394873
 MonoBehaviour:
@@ -4614,7 +4612,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1835066064
 RectTransform:
   m_ObjectHideFlags: 0
