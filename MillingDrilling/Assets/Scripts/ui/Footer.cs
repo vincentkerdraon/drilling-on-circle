@@ -50,8 +50,29 @@ namespace ui {
                 bVisu.image.sprite = iInactive;
                 bHelp.image.sprite = iActive;
             });
+
+            Data Data = FindObjectOfType<Data>();
+            Data.DataChanged += Data_OnDrillingCorrect;
+            Data.ParamError += Data_OnDrillingError;
+        }
+
+        public void Data_OnDrillingCorrect(object sender, Data.DataChangedArgs args)
+        {
+            if (bVisu.interactable == false)
+            {
+                bVisu.interactable = true;
+                bVisu.GetComponentInChildren<Text>().color = Color.black;
+            }
+        }
+
+        public void Data_OnDrillingError(object sender, Data.ParamErrorArgs args)
+        {
+            bVisu.interactable = false;
+            bVisu.GetComponentInChildren<Text>().color = Color.grey;
         }
     }
+
+
 }
 
 

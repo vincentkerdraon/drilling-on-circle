@@ -19,9 +19,39 @@ public class VisuCircle : MonoBehaviour
         Data data = GameObject.FindObjectOfType<Data>();
         data.DataChanged += Data_DataChanged;
 
+        float ratio = (float)Screen.height / (float)Screen.width;
 
+       
+        /**
+         * X RATIO
+         * X1 = 1.77 
+         * X2 = 2
+         * 
+         * Z SCALE for Background image
+         * Z1 = 450
+         * Z2 = 400
+         * 
+         * Y Y shift for placing Background image
+         * Y1 = -110
+         * Y2 = -150
+         * */
+        float scale = -217.4f * ratio + 834.8f;
+        Debug.Log("ratio=" + ratio + " scale=" + scale);
+        parent.localScale = new Vector3(scale, scale);
+
+        if (ratio > 1.9)
+        {
+            parent.localPosition = new Vector3(parent.localPosition.x, -150, parent.localPosition.z);
+        }
+        else
+        {
+            parent.localPosition = new Vector3(parent.localPosition.x, -110, parent.localPosition.z);
+        }
+
+
+/*
         Drillings drillings = new Drillings(4,10,0);
-        DisplayDrillings(drillings);
+        DisplayDrillings(drillings);*/
     }
 
     public void Data_DataChanged(object sender, Data.DataChangedArgs args)

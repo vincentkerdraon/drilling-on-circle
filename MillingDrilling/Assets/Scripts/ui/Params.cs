@@ -27,33 +27,38 @@ public class Params : MonoBehaviour
 
     Data Data;
 
+    private bool ValidateNBHole(int value){ return value > 0 && value < 200; }
+    private bool ValidateDiameter(double value){ return value > 0d && value < 10000d; }
+    private bool ValidateAngleShift(double value) { return value >= 0d && value < 360; }
+    private bool ValidateCoordSingle(double value) { return value > -10000f && value < 10000f; }
+
     // Start is called before the first frame update
     void Start()
     {
         ifNbHoles.onEndEdit.AddListener(delegate
         {
-            UpdateField<int>(ifNbHoles, ref nbHoles, (value) => { return value > 0 && value < 200; }, (text) => { return int.Parse(text); });
+            UpdateField<int>(ifNbHoles, ref nbHoles, (value) => ValidateNBHole(value), (text) => { return int.Parse(text); });
         });
         ifDiameter.onEndEdit.AddListener(delegate
         {
             IsFirstCoord = false;
-            UpdateField<double>(ifDiameter, ref diameter, (value) => { return value > 0d && value < 10000d; }, (text) => { return double.Parse(text); });
+            UpdateField<double>(ifDiameter, ref diameter, (value) => ValidateDiameter(value), (text) => { return double.Parse(text); });
         });
         ifAngleShift.onEndEdit.AddListener(delegate
         {
             IsFirstCoord = false;
-            UpdateField<double>(ifAngleShift, ref angleShift, (value) => { return value >= 0d && value < 360; }, (text) => { return double.Parse(text); });
+            UpdateField<double>(ifAngleShift, ref angleShift, (value) => ValidateAngleShift(value), (text) => { return double.Parse(text); });
         });
         ifCoordX.onEndEdit.AddListener(delegate
         {
             IsFirstCoord = true;
-            UpdateField<float>(ifCoordX, ref FirstCoord.X, (value) => { return value > -10000f && value < 10000f; }, (text) => { return float.Parse(text); });
+            UpdateField<float>(ifCoordX, ref FirstCoord.X, (value) => ValidateCoordSingle(value), (text) => { return float.Parse(text); });
             Debug.Log("FirstCoord="+FirstCoord);
         });
         ifCoordY.onEndEdit.AddListener(delegate
         {
             IsFirstCoord = true;
-            UpdateField<float>(ifCoordY, ref FirstCoord.Y, (value) => { return value > -10000f && value < 10000f; }, (text) => { return float.Parse(text); });
+            UpdateField<float>(ifCoordY, ref FirstCoord.Y, (value) => ValidateCoordSingle(value), (text) => { return float.Parse(text); });
             Debug.Log("FirstCoord=" + FirstCoord);
         });
 
@@ -68,14 +73,26 @@ public class Params : MonoBehaviour
 
     private void UpdateParams()
     {
+        if (!ValidateNBHole(nbHoles))
+        {
+            throw new System.ArgumentException();
+        }
         Scripts.Drillings drillings;
         if (IsFirstCoord)
         {
+            if(!ValidateCoordSingle(FirstCoord.X) || !ValidateCoordSingle(FirstCoord.Y) || (FirstCoord.X == 0d && FirstCoord.Y == 0d))
+            {
+                throw new System.ArgumentException();
+            }
             Debug.Log("updated params " + nbHoles + " " + FirstCoord);
             drillings = Scripts.Drillings.DrillingsFromExistingHole((uint)nbHoles, FirstCoord);
         }
         else
         {
+            if(!ValidateAngleShift(angleShift) || !ValidateDiameter(diameter))
+            {
+                throw new System.ArgumentException();
+            }
         Debug.Log("updated params " + nbHoles + " " + diameter + " " + angleShift);
         drillings = new Scripts.Drillings((uint)nbHoles, diameter, angleShift);
         }
@@ -91,15 +108,20 @@ public class Params : MonoBehaviour
             value = parseFunc(inputField.text);
             if (validateFunc(value))
             {
+                inputField.colors = ColorBlock.defaultColorBlock;
                 UpdateParams();
                 return;
             }
         }
         catch (System.Exception e)
         {
+            if (Data.ParamError != null) Data.ParamError(this, new Data.ParamErrorArgs() { code = Data.ParamErrorCode.INVALID });
             Debug.LogError(e);
+            return;
         }
-        Debug.LogError("Some wild errors appears;");
-       // inputField.
+        if (Data.ParamError != null) Data.ParamError(this, new Data.ParamErrorArgs() { code = Data.ParamErrorCode.INVALID });
+        ColorBlock colorBlock = ColorBlock.defaultColorBlock;
+        colorBlock.normalColor = Color.red;
+        inputField.colors = colorBlock;
     }
 }
