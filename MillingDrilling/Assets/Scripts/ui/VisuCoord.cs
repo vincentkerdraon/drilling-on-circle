@@ -15,10 +15,16 @@ public class VisuCoord : MonoBehaviour
     [SerializeField]
     private Transform VisuPanel;
 
-    public int NB_ROWS = 3;
+    [SerializeField]
+    private Button Next;
+    [SerializeField]
+    private Button Previous;
+
+    public int NB_ROWS = 4;
     public int NB_COLUMNS = 2;
 
     private List<GameObject> gridParentList = new List<GameObject>();
+    private int index;
 
     // Start is called before the first frame update
     void Start()
@@ -29,8 +35,21 @@ public class VisuCoord : MonoBehaviour
         HoleSelected HoleSelected = GameObject.FindObjectOfType<HoleSelected>();
         HoleSelected.HoleSelectedEvent += DrillingElement_Selected;
 
-        /*        Debug.Log("Looking in Visu.Start()");
-                DisplayDrillings(data.drillings);*/
+        Next.onClick.AddListener(delegate
+        {
+            UpdateIndex(this.index + 1);
+        });
+        Previous.onClick.AddListener(delegate
+        {
+            UpdateIndex(this.index - 1);
+        });
+
+        Next.interactable = false;
+        Previous.interactable = false;
+
+
+        Debug.Log("Looking in Visu.Start()");
+        DisplayDrillings(data.drillings);
     }
 
     // Update is called once per frame
@@ -48,6 +67,43 @@ public class VisuCoord : MonoBehaviour
     public void DrillingElement_Selected(object sender, HoleSelected.HoleSelectedArgs args)
     {
         Debug.Log("Selected " + args.index);
+        UpdateIndex((args.index - 1) / (NB_COLUMNS * NB_ROWS));
+    }
+
+    private void UpdateIndex(int newIndex)
+    {
+        foreach (var gridObject in gridParentList)
+        {
+
+            gridObject.SetActive(false);
+        }
+        if (newIndex >= 0 && newIndex < gridParentList.Count)
+        {
+            gridParentList[newIndex].SetActive(true);
+            index = newIndex;
+        }
+        else
+        {
+            Debug.LogError("Out of bounds");
+        }
+
+        if (index > 0)
+        {
+            Previous.interactable = true;
+        }
+        else
+        {
+            Previous.interactable = false;
+        }
+
+        if (index < gridParentList.Count - 1)
+        {
+            Next.interactable = true;
+        }
+        else
+        {
+            Next.interactable = false;
+        }
     }
 
     public void DisplayDrillings(Drillings drillings)
@@ -71,18 +127,22 @@ public class VisuCoord : MonoBehaviour
 
         for (int j = 0; j < drillings.AllDrillingsRounded.Count / (NB_COLUMNS * NB_ROWS) + 1; j++)
         {
-            GridLayoutGroup gridParent = Instantiate<GridLayoutGroup>(prefabVisuGridLayout);
-            gridParent.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-            gridParent.constraintCount = NB_COLUMNS;
-            gridParent.transform.SetParent(VisuPanel, false);
-            gridParent.gameObject.SetActive(false);
-            gridParentList.Add(gridParent.gameObject);
-
             int maxIndex = NB_COLUMNS * NB_ROWS;
             if (drillings.AllDrillingsRounded.Count < (j + 1) * maxIndex)
             {
                 maxIndex = drillings.AllDrillingsRounded.Count - j * maxIndex;
             }
+
+            if(maxIndex == 0)
+            {
+                continue;
+            }
+            GridLayoutGroup gridParent = Instantiate<GridLayoutGroup>(prefabVisuGridLayout);
+            gridParent.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            gridParent.constraintCount = NB_COLUMNS;
+
+            gridParent.transform.SetParent(VisuPanel, false);
+            gridParentList.Add(gridParent.gameObject);
 
             for (int i = 0; i < maxIndex; i++)
             {
@@ -92,6 +152,6 @@ public class VisuCoord : MonoBehaviour
                 drillingElement.transform.SetParent(gridParent.transform, false);
             }
         }
-        gridParentList[0].SetActive(true);
+        UpdateIndex(0);
     }
 }
