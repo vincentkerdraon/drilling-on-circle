@@ -35,27 +35,27 @@ public class Params : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ifNbHoles.onEndEdit.AddListener(delegate
+        ifNbHoles.onValueChanged.AddListener(delegate
         {
             UpdateField<int>(ifNbHoles, ref nbHoles, (value) => ValidateNBHole(value), (text) => { return int.Parse(text); });
         });
-        ifDiameter.onEndEdit.AddListener(delegate
+        ifDiameter.onValueChanged.AddListener(delegate
         {
             IsFirstCoord = false;
             UpdateField<double>(ifDiameter, ref diameter, (value) => ValidateDiameter(value), (text) => { return double.Parse(text); });
         });
-        ifAngleShift.onEndEdit.AddListener(delegate
+        ifAngleShift.onValueChanged.AddListener(delegate
         {
             IsFirstCoord = false;
             UpdateField<double>(ifAngleShift, ref angleShift, (value) => ValidateAngleShift(value), (text) => { return double.Parse(text); });
         });
-        ifCoordX.onEndEdit.AddListener(delegate
+        ifCoordX.onValueChanged.AddListener(delegate
         {
             IsFirstCoord = true;
             UpdateField<float>(ifCoordX, ref FirstCoord.X, (value) => ValidateCoordSingle(value), (text) => { return float.Parse(text); });
             Debug.Log("FirstCoord="+FirstCoord);
         });
-        ifCoordY.onEndEdit.AddListener(delegate
+        ifCoordY.onValueChanged.AddListener(delegate
         {
             IsFirstCoord = true;
             UpdateField<float>(ifCoordY, ref FirstCoord.Y, (value) => ValidateCoordSingle(value), (text) => { return float.Parse(text); });
