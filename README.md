@@ -36,6 +36,7 @@ Let's make a new app also for his birthday!
 - Accessible: simple (no complex swipe or multiple panels). 
 - Accessible: can be use when put on the drilling machine.
 - Unit should be in mm + degrees. Precision should be 1 micrometer.
+- target phone is a "Wiko Lennny 2 Android 5.1; resolution 480 x 854 pixels, 16:9 ratio"
 
 ## Tech
 
@@ -76,6 +77,10 @@ And the input parameters:
 - Number of holes. Unsigned integer  1<= nb <=999. Usually <12.
 - Angular tilt. In degrees. Unsigned float. 0<= alpha < (360/NbHoles) . Instead of starting at the top in {x=0;y=d/2}, start with a different angle. E.g. if angle=90, first coordinate is {x=d/2;y=0}.
 
+A variation of input params is available:
+- Diameter. In mm. Unsigned float. 0< d <10000.
+- Coord of any existing hole {x;y}.
+
 ### Result screen 
 
 _(see image: right part)_
@@ -91,7 +96,13 @@ Bottom part is a schema:
 
 ### Help screen 
 
-//TODO
+lorem ...
+
+## Result ready for 2021-04-30
+
+![Params with validation error](PercageCirculaire2021_params.PNG)
+![Visualization](PercageCirculaire2021_visu.PNG)
+![Help](PercageCirculaire2021_aide.PNG)
 
 ## MIT License
 
